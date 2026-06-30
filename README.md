@@ -24,7 +24,7 @@ This project implements a complete contest participation backend where:
 
 ## Quick review/test Guide
 
-##  Test Online
+##  Test Online ( I am using free tier of strapi and vercel , if its not working please test lcoally with postman sorry )
 
 I have deployed this assignment on the cloud for quick and easy review/testing.
 
