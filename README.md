@@ -57,7 +57,11 @@ Create a database named:
 
 `contest_participation_system`
 
-### Step 3: Install dependencies and build
+
+### Step 3: Copy `.env.example` to `.env`. and set database username and password according to yours
+
+
+### Step 4: Install dependencies and build
 
 Run the following commands from the project root:
 
@@ -65,10 +69,6 @@ Run the following commands from the project root:
 - `pnpm typecheck`
 - `pnpm build`
 - `pnpm develop`
-
-
-
-### Step 4: Copy `.env.example` to `.env`. and set database username and password according to yours
 
 
 ### Step 5: Import the Postman collection
