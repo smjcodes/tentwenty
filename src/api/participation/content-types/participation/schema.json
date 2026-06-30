@@ -1,0 +1,60 @@
+{
+  "kind": "collectionType",
+  "collectionName": "participations",
+  "info": {
+    "singularName": "participation",
+    "pluralName": "participations",
+    "displayName": "Participation",
+    "description": "Contest attempts started by users"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "participations",
+      "required": true
+    },
+    "contest": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::contest.contest",
+      "inversedBy": "participations",
+      "required": true
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": ["IN_PROGRESS", "SUBMITTED"],
+      "default": "IN_PROGRESS",
+      "required": true
+    },
+    "score": {
+      "type": "integer",
+      "default": 0,
+      "required": true
+    },
+    "startedAt": {
+      "type": "datetime",
+      "required": true
+    },
+    "submittedAt": {
+      "type": "datetime"
+    },
+    "answers": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::user-answer.user-answer",
+      "mappedBy": "participation"
+    },
+    "prizeWinner": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::prize-winner.prize-winner",
+      "mappedBy": "participation"
+    }
+  }
+}

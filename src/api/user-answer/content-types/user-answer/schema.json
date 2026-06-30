@@ -1,0 +1,44 @@
+{
+  "kind": "collectionType",
+  "collectionName": "user_answers",
+  "info": {
+    "singularName": "user-answer",
+    "pluralName": "user-answers",
+    "displayName": "User Answer",
+    "description": "Stored submitted answers per participation"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "participation": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::participation.participation",
+      "inversedBy": "answers",
+      "required": true
+    },
+    "question": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::question.question",
+      "required": true
+    },
+    "selectedOptionIds": {
+      "type": "json",
+      "required": true
+    },
+    "isCorrect": {
+      "type": "boolean",
+      "default": false,
+      "required": true,
+      "private": true
+    },
+    "pointsAwarded": {
+      "type": "integer",
+      "default": 0,
+      "required": true
+    }
+  }
+}

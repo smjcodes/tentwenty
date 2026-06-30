@@ -1,0 +1,44 @@
+{
+  "kind": "collectionType",
+  "collectionName": "questions",
+  "info": {
+    "singularName": "question",
+    "pluralName": "questions",
+    "displayName": "Question",
+    "description": "Contest questions"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "contest": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::contest.contest",
+      "inversedBy": "questions",
+      "required": true
+    },
+    "text": {
+      "type": "text",
+      "required": true
+    },
+    "questionType": {
+      "type": "enumeration",
+      "enum": ["SINGLE_SELECT", "MULTI_SELECT", "TRUE_FALSE"],
+      "required": true
+    },
+    "points": {
+      "type": "integer",
+      "default": 1,
+      "min": 1,
+      "required": true
+    },
+    "options": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::option.option",
+      "mappedBy": "question"
+    }
+  }
+}

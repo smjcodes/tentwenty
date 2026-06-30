@@ -7,6 +7,8 @@ const config: Core.Config.Middlewares = [
   'strapi::cors',
   'strapi::poweredBy',
   'strapi::query',
+  'global::api-rate-limit',
+  'global::reject-revoked-token',
   'strapi::body',
   'strapi::session',
   'strapi::favicon',

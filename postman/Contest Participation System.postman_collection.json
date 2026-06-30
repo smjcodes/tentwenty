@@ -1,0 +1,517 @@
+{
+  "info": {
+    "_postman_id": "8f3b624d-e8a0-4f85-9b48-f0e758e899d7",
+    "name": "Contest Participation System",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "Strapi v5 backend endpoints for the Contest Participation System."
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:1337"
+    },
+    {
+      "key": "normalUserIdentifier",
+      "value": "normal@example.com"
+    },
+    {
+      "key": "normalUserPassword",
+      "value": "Password1"
+    },
+    {
+      "key": "vipUserIdentifier",
+      "value": "vip@example.com"
+    },
+    {
+      "key": "vipUserPassword",
+      "value": "Password1"
+    },
+    {
+      "key": "contestAdminIdentifier",
+      "value": "contestadmin@example.com"
+    },
+    {
+      "key": "contestAdminPassword",
+      "value": "Password1"
+    },
+    {
+      "key": "jwt",
+      "value": ""
+    },
+    {
+      "key": "vipJwt",
+      "value": ""
+    },
+    {
+      "key": "contestAdminJwt",
+      "value": ""
+    },
+    {
+      "key": "activeJwt",
+      "value": ""
+    },
+    {
+      "key": "contestId",
+      "value": ""
+    },
+    {
+      "key": "vipContestId",
+      "value": ""
+    },
+    {
+      "key": "questionId",
+      "value": ""
+    },
+    {
+      "key": "optionId",
+      "value": ""
+    }
+  ],
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Login - Normal User",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const json = pm.response.json();",
+                  "if (json.jwt) {",
+                  "  pm.collectionVariables.set('jwt', json.jwt);",
+                  "  pm.collectionVariables.set('activeJwt', json.jwt);",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"identifier\": \"{{normalUserIdentifier}}\",\n  \"password\": \"{{normalUserPassword}}\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/local",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "auth", "local"]
+            }
+          }
+        },
+        {
+          "name": "Login - VIP User",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const json = pm.response.json();",
+                  "if (json.jwt) {",
+                  "  pm.collectionVariables.set('vipJwt', json.jwt);",
+                  "  pm.collectionVariables.set('activeJwt', json.jwt);",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"identifier\": \"{{vipUserIdentifier}}\",\n  \"password\": \"{{vipUserPassword}}\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/local",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "auth", "local"]
+            }
+          }
+        },
+        {
+          "name": "Login - Contest Admin",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const json = pm.response.json();",
+                  "if (json.jwt) {",
+                  "  pm.collectionVariables.set('contestAdminJwt', json.jwt);",
+                  "  pm.collectionVariables.set('activeJwt', json.jwt);",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"identifier\": \"{{contestAdminIdentifier}}\",\n  \"password\": \"{{contestAdminPassword}}\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/local",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "auth", "local"]
+            }
+          }
+        },
+        {
+          "name": "Logout - Revoke Active Token",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const activeToken = pm.collectionVariables.get('activeJwt');",
+                  "if (pm.collectionVariables.get('jwt') === activeToken) pm.collectionVariables.unset('jwt');",
+                  "if (pm.collectionVariables.get('vipJwt') === activeToken) pm.collectionVariables.unset('vipJwt');",
+                  "if (pm.collectionVariables.get('contestAdminJwt') === activeToken) pm.collectionVariables.unset('contestAdminJwt');",
+                  "pm.collectionVariables.unset('activeJwt');"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "description": "Revokes whichever JWT is currently stored in {{activeJwt}}. Login requests automatically refresh {{activeJwt}} so you can switch users cleanly in Postman.",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{activeJwt}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/logout",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "auth", "logout"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Contests",
+      "item": [
+        {
+          "name": "List Contests",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const json = pm.response.json();",
+                  "const contests = json.data || [];",
+                  "const normalContest = contests.find((contest) => contest.accessLevel === 'NORMAL');",
+                  "const vipContest = contests.find((contest) => contest.accessLevel === 'VIP');",
+                  "if (normalContest?.id) pm.collectionVariables.set('contestId', normalContest.id);",
+                  "if (vipContest?.id) pm.collectionVariables.set('vipContestId', vipContest.id);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/contests",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "contests"]
+            }
+          }
+        },
+        {
+          "name": "Get Contest Detail",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const json = pm.response.json();",
+                  "const contest = json.data || {};",
+                  "const firstQuestion = contest.questions?.[0];",
+                  "const firstOption = firstQuestion?.options?.[0];",
+                  "if (firstQuestion?.id) pm.collectionVariables.set('questionId', firstQuestion.id);",
+                  "if (firstOption?.id) pm.collectionVariables.set('optionId', firstOption.id);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/contests/{{contestId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "contests", "{{contestId}}"]
+            }
+          }
+        },
+        {
+          "name": "Join Contest",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{jwt}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/contests/{{contestId}}/join",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "contests", "{{contestId}}", "join"]
+            }
+          }
+        },
+        {
+          "name": "Join VIP Contest - VIP User",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{vipJwt}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/contests/{{vipContestId}}/join",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "contests", "{{vipContestId}}", "join"]
+            }
+          }
+        },
+        {
+          "name": "Join VIP Contest - Normal User Should Fail",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{jwt}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/contests/{{vipContestId}}/join",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "contests", "{{vipContestId}}", "join"]
+            }
+          }
+        },
+        {
+          "name": "Submit Answers",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{jwt}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"answers\": [\n    {\n      \"questionId\": \"{{questionId}}\",\n      \"selectedOptionIds\": [\"{{optionId}}\"]\n    }\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/contests/{{contestId}}/submit",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "contests", "{{contestId}}", "submit"]
+            }
+          }
+        },
+        {
+          "name": "Leaderboard",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/contests/{{contestId}}/leaderboard",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "contests", "{{contestId}}", "leaderboard"]
+            }
+          }
+        },
+        {
+          "name": "Award Prize",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{contestAdminJwt}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/contests/{{contestId}}/award-prize",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "contests", "{{contestId}}", "award-prize"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "My Account",
+      "item": [
+        {
+          "name": "My Profile",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{jwt}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/users/me",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "users", "me"]
+            }
+          }
+        },
+        {
+          "name": "My Profile With Role",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{jwt}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/users/me?populate=role",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "users", "me"],
+              "query": [
+                {
+                  "key": "populate",
+                  "value": "role"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "VIP Profile With Role",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{vipJwt}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/users/me?populate=role",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "users", "me"],
+              "query": [
+                {
+                  "key": "populate",
+                  "value": "role"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "My History",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{jwt}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/me/history",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "me", "history"]
+            }
+          }
+        },
+        {
+          "name": "My In Progress",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{jwt}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/me/in-progress",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "me", "in-progress"]
+            }
+          }
+        },
+        {
+          "name": "My Prizes",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{jwt}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/me/prizes",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "me", "prizes"]
+            }
+          }
+        },
+        {
+          "name": "My Prizes - VIP User",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{vipJwt}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/me/prizes",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "me", "prizes"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

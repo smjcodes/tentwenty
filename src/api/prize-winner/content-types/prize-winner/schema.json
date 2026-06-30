@@ -1,0 +1,45 @@
+{
+  "kind": "collectionType",
+  "collectionName": "prize_winners",
+  "info": {
+    "singularName": "prize-winner",
+    "pluralName": "prize-winners",
+    "displayName": "Prize Winner",
+    "description": "Prize awards granted to winning participations"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "prizeWinnings",
+      "required": true
+    },
+    "contest": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::contest.contest",
+      "inversedBy": "prizeWinner",
+      "required": true
+    },
+    "participation": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::participation.participation",
+      "inversedBy": "prizeWinner",
+      "required": true
+    },
+    "prizeInfoSnapshot": {
+      "type": "text",
+      "required": true
+    },
+    "awardedAt": {
+      "type": "datetime",
+      "required": true
+    }
+  }
+}
