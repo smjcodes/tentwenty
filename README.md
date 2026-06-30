@@ -58,7 +58,7 @@ Create a database named:
 `contest_participation_system`
 
 
-### Step 3: Copy `.env.example` to `.env`. and set database username and password according to yours
+### Step 3: `Run cp .env.example .env`  to   Copy .env.example to .env  and set database username and password according to yours
 
 
 ### Step 4: Install dependencies and build
