@@ -14,6 +14,85 @@ This project implements a complete contest participation backend where:
 - admins manage content from Strapi Admin Panel
 - a dedicated content API admin role can award prizes through the custom API
 
+## Tech Stack
+
+- Strapi `5.49.0`
+- TypeScript
+- PostgreSQL
+- Strapi Users & Permissions plugin
+- `pg` PostgreSQL driver
+
+## Quick review/test Guide
+
+##  Test Online
+
+I have deployed this assignment on the cloud for quick and easy review/testing.
+
+### Backend (Strapi)
+- **Live API URL**: [https://effortless-chickens-aca8e2539a.strapiapp.com/](https://effortless-chickens-aca8e2539a.strapiapp.com/)
+- **Admin Panel**: [https://effortless-chickens-aca8e2539a.strapiapp.com/admin](https://effortless-chickens-aca8e2539a.strapiapp.com/admin)
+
+**Super Admin Credentials**
+- **Email**: `smjcodes@gmail.com`
+- **Password**: `Pakistan1`
+
+### Frontend (Next.js)
+- **Live URL**: [https://frontend-umber-mu-36.vercel.app/](https://frontend-umber-mu-36.vercel.app/)
+
+**Pre-saved Test Accounts**  
+Normal User, VIP User, and Admin accounts are available with pre-configured credentials for easy testing.
+
+
+
+
+## Testing Locally with Postman
+
+Follow these steps to get the project running locally and test the APIs.
+
+### Step 1: Clone the repository
+
+### Step 2: Create the PostgreSQL database
+
+Create a database named:
+
+\`\`\`
+contest_participation_system
+\`\`\`
+
+### Step 3: Install dependencies and build
+
+Run the following commands from the project root:
+
+\`\`\`bash
+pnpm install
+pnpm typecheck
+pnpm build
+pnpm develop
+\`\`\`
+
+
+### Step 4: Copy `.env.example` to `.env`. and set database username and password according to yours
+
+
+### Step 5: Import the Postman collection
+
+Open Postman and import the collection from the `postman/` folder.
+
+### Step 6: Run "List Contests" first
+
+Before testing other endpoints, run the **List Contests** request. This returns the contest IDs you'll need as inputs for the rest of the requests.
+
+### Step 7: Test the remaining APIs
+
+Once you have contest IDs, proceed to test the rest of the endpoints in the collection also Run Get Contest Detail once to auto-fill questionId and optionId for the sample Submit Answers request.
+
+Follow Postman guide : https://github.com/smjcodes/tentwenty#postman-collection 
+
+> For setup details on environment variables, authentication, and role-based access, see the relevant sections in the main README.md.
+
+
+
+
 ## Verification Status
 
 This project has been verified locally with PostgreSQL.
@@ -35,13 +114,7 @@ Verification note:
 
 - the application was run locally against PostgreSQL, not only against a fallback development database
 
-## Tech Stack
 
-- Strapi `5.49.0`
-- TypeScript
-- PostgreSQL
-- Strapi Users & Permissions plugin
-- `pg` PostgreSQL driver
 
 ## Local Run Commands
 
@@ -106,11 +179,11 @@ DATABASE_SSL_REJECT_UNAUTHORIZED=true
 
 SEED_SAMPLE_DATA=true
 SEED_NORMAL_USER_EMAIL=normal@example.com
-SEED_NORMAL_USER_PASSWORD=Password123!
+SEED_NORMAL_USER_PASSWORD=Pakistan1
 SEED_VIP_USER_EMAIL=vip@example.com
-SEED_VIP_USER_PASSWORD=Password123!
+SEED_VIP_USER_PASSWORD=Pakistan1
 SEED_CONTEST_ADMIN_EMAIL=contestadmin@example.com
-SEED_CONTEST_ADMIN_PASSWORD=Password123!
+SEED_CONTEST_ADMIN_PASSWORD=Pakistan1
 ```
 
 Notes:
@@ -224,13 +297,13 @@ These are created automatically when `SEED_SAMPLE_DATA=true`:
 
 - Normal user
   - email: `normal@example.com`
-  - password: `Password123!`
+  - password: `Pakistan1`
 - VIP user
   - email: `vip@example.com`
-  - password: `Password123!`
+  - password: `Pakistan1`
 - Contest API admin
   - email: `contestadmin@example.com`
-  - password: `Password123!`
+  - password: `Pakistan1`
 
 These are sample interview credentials for local testing, not production credentials.
 
