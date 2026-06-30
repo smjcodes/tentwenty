@@ -61,12 +61,11 @@ Create a database named:
 
 Run the following commands from the project root:
 
-\`\`\`bash
-`pnpm install`
-`pnpm typecheck`
-`pnpm build`
-`pnpm develop`
-\`\`\`
+- `pnpm install`
+- `pnpm typecheck`
+- `pnpm build`
+- `pnpm develop`
+
 
 
 ### Step 4: Copy `.env.example` to `.env`. and set database username and password according to yours
