@@ -29,8 +29,8 @@ This project implements a complete contest participation backend where:
 I have deployed this assignment on the cloud for quick and easy review/testing.
 
 ### Backend (Strapi)
-- **Live API URL**: [https://effortless-chickens-aca8e2539a.strapiapp.com/](https://effortless-chickens-aca8e2539a.strapiapp.com/)
-- **Admin Panel**: [https://effortless-chickens-aca8e2539a.strapiapp.com/admin](https://effortless-chickens-aca8e2539a.strapiapp.com/admin)
+- **Strapi Live API URL**: [https://effortless-chickens-aca8e2539a.strapiapp.com/](https://effortless-chickens-aca8e2539a.strapiapp.com/)
+- **Strapi Admin Panel**: [https://effortless-chickens-aca8e2539a.strapiapp.com/admin](https://effortless-chickens-aca8e2539a.strapiapp.com/admin)
 
 **Super Admin Credentials**
 - **Email**: `smjcodes@gmail.com`
