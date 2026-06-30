@@ -55,19 +55,17 @@ Follow these steps to get the project running locally and test the APIs.
 
 Create a database named:
 
-\`\`\`
-contest_participation_system
-\`\`\`
+`contest_participation_system`
 
 ### Step 3: Install dependencies and build
 
 Run the following commands from the project root:
 
 \`\`\`bash
-pnpm install
-pnpm typecheck
-pnpm build
-pnpm develop
+`pnpm install`
+`pnpm typecheck`
+`pnpm build`
+`pnpm develop`
 \`\`\`
 
 
